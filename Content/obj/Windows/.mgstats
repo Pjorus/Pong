@@ -6,6 +6,7 @@ Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Siz
 "c:/MonoGame/Pong/Pong/Content/bounceOne.mp3","c:/MonoGame/Pong/Pong/Content/bin/Windows/bounceOne.xnb","SongProcessor","SongContent",13886,127,0.1384936
 "c:/MonoGame/Pong/Pong/Content/bounceTwo.mp3","c:/MonoGame/Pong/Pong/Content/bin/Windows/bounceTwo.xnb","SongProcessor","SongContent",9086,127,0.1069346
 "c:/MonoGame/Pong/Pong/Content/middleLineNew.png","c:/MonoGame/Pong/Pong/Content/bin/Windows/middleLine.xnb","TextureProcessor","Texture2DContent",3237,229045,0.0090013
+"c:/MonoGame/Pong/Pong/Content/Pedro - Pedro Pedro Pedro.mp3","c:/MonoGame/Pong/Pong/Content/bin/Windows/PedroSong.xnb","SongProcessor","SongContent",7133574,127,1.7456514
 "c:/MonoGame/Pong/Pong/Content/pedro_pedro_pe.png","c:/MonoGame/Pong/Pong/Content/bin/Windows/pedro_pedro_pe.xnb","TextureProcessor","Texture2DContent",1522367,14745685,0.4902533
 "c:/MonoGame/Pong/Pong/Content/pointScored.mp3","c:/MonoGame/Pong/Pong/Content/bin/Windows/pointScored.xnb","SongProcessor","SongContent",51326,129,0.1310176
 "c:/MonoGame/Pong/Pong/Content/Score.spritefont","c:/MonoGame/Pong/Pong/Content/bin/Windows/Score.xnb","FontDescriptionProcessor","SpriteFontContent",2073,2102297,0.1993296

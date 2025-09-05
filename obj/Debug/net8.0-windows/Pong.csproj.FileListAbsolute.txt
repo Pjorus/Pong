@@ -37,3 +37,6 @@ C:\MonoGame\Pong\Pong\bin\Debug\net8.0-windows\Content\pointScored.xnb
 C:\MonoGame\Pong\Pong\bin\Debug\net8.0-windows\Content\balkGrow.xnb
 C:\MonoGame\Pong\Pong\bin\Debug\net8.0-windows\Content\ballGrow.xnb
 C:\MonoGame\Pong\Pong\bin\Debug\net8.0-windows\Content\pedro_pedro_pe.xnb
+C:\MonoGame\Pong\Pong\bin\Debug\net8.0-windows\Content\PedroSong.wma
+C:\MonoGame\Pong\Pong\bin\Debug\net8.0-windows\Content\PedroSong.xnb
+C:\MonoGame\Pong\Pong\obj\Debug\net8.0-windows\Pong.sourcelink.json

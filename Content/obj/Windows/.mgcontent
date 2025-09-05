@@ -11,6 +11,7 @@
     <File>c:/MonoGame/Pong/Pong/Content/bounceOne.mp3</File>
     <File>c:/MonoGame/Pong/Pong/Content/bounceTwo.mp3</File>
     <File>c:/MonoGame/Pong/Pong/Content/middleLineNew.png</File>
+    <File>c:/MonoGame/Pong/Pong/Content/Pedro - Pedro Pedro Pedro.mp3</File>
     <File>c:/MonoGame/Pong/Pong/Content/pedro_pedro_pe.png</File>
     <File>c:/MonoGame/Pong/Pong/Content/pointScored.mp3</File>
     <File>c:/MonoGame/Pong/Pong/Content/Score.spritefont</File>
@@ -23,6 +24,7 @@
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File>middleLine.png</File>
+    <File>PedroSong.mp3</File>
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

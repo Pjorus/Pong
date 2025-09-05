@@ -85,6 +85,12 @@
 /processorParam:TextureFormat=Color
 /build:middleLineNew.png;middleLine.png
 
+#begin Pedro - Pedro Pedro Pedro.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Pedro - Pedro Pedro Pedro.mp3;PedroSong.mp3
+
 #begin pedro_pedro_pe.png
 /importer:TextureImporter
 /processor:TextureProcessor
