@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Profile>Reach</Profile>
+  <Platform>Windows</Platform>
+  <Config />
+  <SourceFiles>
+    <File>c:/MonoGame/Pong/Pong/Content/balkGrow.png</File>
+    <File>c:/MonoGame/Pong/Pong/Content/balkwhite (1).png</File>
+    <File>c:/MonoGame/Pong/Pong/Content/ballGrow.png</File>
+    <File>c:/MonoGame/Pong/Pong/Content/ballwhite.png</File>
+    <File>c:/MonoGame/Pong/Pong/Content/bounceOne.mp3</File>
+    <File>c:/MonoGame/Pong/Pong/Content/bounceTwo.mp3</File>
+    <File>c:/MonoGame/Pong/Pong/Content/middleLineNew.png</File>
+    <File>c:/MonoGame/Pong/Pong/Content/pedro_pedro_pe.png</File>
+    <File>c:/MonoGame/Pong/Pong/Content/pointScored.mp3</File>
+    <File>c:/MonoGame/Pong/Pong/Content/Score.spritefont</File>
+  </SourceFiles>
+  <DestFiles>
+    <File xsi:nil="true" />
+    <File>balk.png</File>
+    <File xsi:nil="true" />
+    <File>ball.png</File>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File>middleLine.png</File>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+  </DestFiles>
+</SourceFileCollection>

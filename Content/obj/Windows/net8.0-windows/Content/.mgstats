@@ -1,0 +1,11 @@
+Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"C:/MonoGame/Pong/Pong/Content/balkGrow.png","C:/MonoGame/Pong/Pong/Content/bin/Windows/Content/balkGrow.xnb","TextureProcessor","Texture2DContent",19345,262229,0.1287488
+"C:/MonoGame/Pong/Pong/Content/balkwhite (1).png","C:/MonoGame/Pong/Pong/Content/bin/Windows/Content/balk.xnb","TextureProcessor","Texture2DContent",92,38997,0.0999901
+"C:/MonoGame/Pong/Pong/Content/ballGrow.png","C:/MonoGame/Pong/Pong/Content/bin/Windows/Content/ballGrow.xnb","TextureProcessor","Texture2DContent",22493,262229,0.0187524
+"C:/MonoGame/Pong/Pong/Content/ballwhite.png","C:/MonoGame/Pong/Pong/Content/bin/Windows/Content/ball.xnb","TextureProcessor","Texture2DContent",1267,16469,0.0046008
+"C:/MonoGame/Pong/Pong/Content/bounceOne.mp3","C:/MonoGame/Pong/Pong/Content/bin/Windows/Content/bounceOne.xnb","SongProcessor","SongContent",13886,127,1.4376049
+"C:/MonoGame/Pong/Pong/Content/bounceTwo.mp3","C:/MonoGame/Pong/Pong/Content/bin/Windows/Content/bounceTwo.xnb","SongProcessor","SongContent",9086,127,0.1353135
+"C:/MonoGame/Pong/Pong/Content/middleLineNew.png","C:/MonoGame/Pong/Pong/Content/bin/Windows/Content/middleLine.xnb","TextureProcessor","Texture2DContent",3237,229045,0.1134827
+"C:/MonoGame/Pong/Pong/Content/pedro_pedro_pe.png","C:/MonoGame/Pong/Pong/Content/bin/Windows/Content/pedro_pedro_pe.xnb","TextureProcessor","Texture2DContent",1522367,14745685,0.4273553
+"C:/MonoGame/Pong/Pong/Content/pointScored.mp3","C:/MonoGame/Pong/Pong/Content/bin/Windows/Content/pointScored.xnb","SongProcessor","SongContent",51326,129,0.1429778
+"C:/MonoGame/Pong/Pong/Content/Score.spritefont","C:/MonoGame/Pong/Pong/Content/bin/Windows/Content/Score.xnb","FontDescriptionProcessor","SpriteFontContent",2073,2102297,0.3362983
