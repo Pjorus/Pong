@@ -4,6 +4,7 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
+    <File>C:/MonoGame/Pong/Pong/Content/arcade-beat-323176.mp3</File>
     <File>C:/MonoGame/Pong/Pong/Content/balkGrow.png</File>
     <File>C:/MonoGame/Pong/Pong/Content/balkwhite (1).png</File>
     <File>C:/MonoGame/Pong/Pong/Content/ballGrow.png</File>
@@ -15,8 +16,10 @@
     <File>C:/MonoGame/Pong/Pong/Content/pedro_pedro_pe.png</File>
     <File>C:/MonoGame/Pong/Pong/Content/pointScored.mp3</File>
     <File>C:/MonoGame/Pong/Pong/Content/Score.spritefont</File>
+    <File>C:/MonoGame/Pong/Pong/Content/titleScreen.spritefont</File>
   </SourceFiles>
   <DestFiles>
+    <File>titleScreenMusic.mp3</File>
     <File xsi:nil="true" />
     <File>balk.png</File>
     <File xsi:nil="true" />
@@ -25,6 +28,7 @@
     <File xsi:nil="true" />
     <File>middleLine.png</File>
     <File>PedroSong.mp3</File>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
