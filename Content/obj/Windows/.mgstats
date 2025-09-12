@@ -11,4 +11,4 @@ Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Siz
 "c:/MonoGame/Pong/Pong/Content/pedro_pedro_pe.png","c:/MonoGame/Pong/Pong/Content/bin/Windows/pedro_pedro_pe.xnb","TextureProcessor","Texture2DContent",1522367,14745685,0.4902533
 "c:/MonoGame/Pong/Pong/Content/pointScored.mp3","c:/MonoGame/Pong/Pong/Content/bin/Windows/pointScored.xnb","SongProcessor","SongContent",51326,129,0.1310176
 "c:/MonoGame/Pong/Pong/Content/Score.spritefont","c:/MonoGame/Pong/Pong/Content/bin/Windows/Score.xnb","FontDescriptionProcessor","SpriteFontContent",2073,2102297,0.1993296
-"c:/MonoGame/Pong/Pong/Content/titleScreen.spritefont","c:/MonoGame/Pong/Pong/Content/bin/Windows/titleScreen.xnb","FontDescriptionProcessor","SpriteFontContent",2072,70681,0.1182911
+"c:/MonoGame/Pong/Pong/Content/titleScreen.spritefont","c:/MonoGame/Pong/Pong/Content/bin/Windows/titleScreen.xnb","FontDescriptionProcessor","SpriteFontContent",2073,2102297,0.2915615

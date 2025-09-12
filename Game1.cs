@@ -12,7 +12,10 @@ public class Game1 : Game
 
     private Scene _currentScene;
     private SpriteFont _font;
+    private SpriteFont _titleFont;
     private Song backgroundMusic;
+
+    //private bool gameWon;
 
     public Game1()
     {
@@ -33,12 +36,13 @@ public class Game1 : Game
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
         // Use your existing Score.spritefont
-        _font = Content.Load<SpriteFont>("titleScreen");
+        _font = Content.Load<SpriteFont>("Score");
         backgroundMusic = Content.Load<Song>("titleScreenMusic");
+        _titleFont = Content.Load<SpriteFont>("titleScreen");
 
 
         // Start with the TitleScene
-        _currentScene = new TitleScene(GraphicsDevice, _spriteBatch, _font, backgroundMusic);
+        _currentScene = new TitleScene(GraphicsDevice, _spriteBatch, _font, backgroundMusic, _titleFont);
     }
 
     protected override void Update(GameTime gameTime)
@@ -46,6 +50,10 @@ public class Game1 : Game
         if (_currentScene is TitleScene titleScene && titleScene.RequestStartGame)
         {
             _currentScene = new GameScene(GraphicsDevice, _spriteBatch, Content);
+        }
+        else if (_currentScene is GameScene gameScene && gameScene.GameOver)
+        {
+            //_currentScene = new endScreen(gameWon)
         }
         else
         {
