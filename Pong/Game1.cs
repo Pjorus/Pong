@@ -40,6 +40,8 @@ public class Game1 : Game
         backgroundMusic = Content.Load<Song>("titleScreenMusic");
         _titleFont = Content.Load<SpriteFont>("titleScreen");
 
+        //Dit is een test
+
 
         // Start with the TitleScene
         _currentScene = new TitleScene(GraphicsDevice, _spriteBatch, _font, backgroundMusic, _titleFont);
