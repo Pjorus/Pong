@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
 using Pong.Scenes;
@@ -15,16 +16,32 @@ public class Game1 : Game
     private SpriteFont _titleFont;
     private Song backgroundMusic;
 
+
+    // Two Player Scene assets
+    private Texture2D ballTexture;
+    private Texture2D leftPaddleTexture;
+    private Texture2D middleLineTexture;
+    private SpriteFont leftPoints;
+    private Song pointScored;
+    private Song bounceOne;
+    private Song bounceTwo;
+
+
+
+
+    private Matrix _scaleMatrix;
+
     //private bool gameWon;
 
     public Game1()
     {
         _graphics = new GraphicsDeviceManager(this);
 
-        _graphics.PreferredBackBufferWidth = 1920;
-        _graphics.PreferredBackBufferHeight = 1080;
+        // Set resolution dynamically
+        _graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+        _graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
 
-        // Runs the game in "full Screen" mode using the set resolution
+        // Fullscreen mode
         _graphics.IsFullScreen = true;
 
         Content.RootDirectory = "Content";
@@ -35,11 +52,27 @@ public class Game1 : Game
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-        // Use your existing Score.spritefont
+        // Calculate the scaling matrix
+        float scaleX = (float)_graphics.GraphicsDevice.Viewport.Width / 1920f; // Internal width
+        float scaleY = (float)_graphics.GraphicsDevice.Viewport.Height / 1080f; // Internal height
+        float scale = Math.Min(scaleX, scaleY); // Maintain aspect ratio
+        _scaleMatrix = Matrix.CreateScale(scale);
+
+        // Load fonts and music
         _font = Content.Load<SpriteFont>("Score");
         backgroundMusic = Content.Load<Song>("titleScreenMusic");
         _titleFont = Content.Load<SpriteFont>("titleScreen");
 
+
+        // Load Two Player Scene assets
+        leftPoints = Content.Load<SpriteFont>("Score");
+        ballTexture = Content.Load<Texture2D>("ball");
+        leftPaddleTexture = Content.Load<Texture2D>("balk");
+        middleLineTexture = Content.Load<Texture2D>("middleLine");
+
+        pointScored = Content.Load<Song>("pointScored");
+        bounceOne = Content.Load<Song>("bounceOne");
+        bounceTwo = Content.Load<Song>("bounceTwo");
 
         // Start with the TitleScene
         _currentScene = new TitleScene(GraphicsDevice, _spriteBatch, _font, backgroundMusic, _titleFont);
@@ -49,9 +82,16 @@ public class Game1 : Game
     {
         if (_currentScene is TitleScene titleScene && titleScene.RequestStartGame)
         {
-            _currentScene = new GameScene(GraphicsDevice, _spriteBatch, Content);
+            if (titleScene.SelectedOption == 1)
+            {
+                _currentScene = new onePlayer(GraphicsDevice, _spriteBatch, Content, leftPoints, leftPoints, ballTexture, leftPaddleTexture, middleLineTexture, pointScored, bounceOne, bounceTwo);
+            }
+            else if (titleScene.SelectedOption == 2)
+            {
+                _currentScene = new twoPlayer(GraphicsDevice, _spriteBatch, Content, leftPoints, leftPoints, ballTexture, leftPaddleTexture, middleLineTexture, pointScored, bounceOne, bounceTwo);
+            }
         }
-        else if (_currentScene is GameScene gameScene && gameScene.GameOver)
+        else if (_currentScene is onePlayer gameScene && gameScene.GameOver)
         {
             //_currentScene = new endScreen(gameWon)
         }
@@ -64,7 +104,15 @@ public class Game1 : Game
 
     protected override void Draw(GameTime gameTime)
     {
+        GraphicsDevice.Clear(Color.Black);
+
+        // Begin the SpriteBatch with the scaling matrix
+        _spriteBatch.Begin(transformMatrix: _scaleMatrix);
+
         _currentScene.Draw(gameTime);
+
+        _spriteBatch.End();
+
         base.Draw(gameTime);
     }
 }
