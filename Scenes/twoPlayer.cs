@@ -63,6 +63,7 @@ public class twoPlayer : Scene
     private bool ballIsPaused = false;
     private float respawnTimer = 0f;
     private float respawnDelay = 1.0f; // seconds to wait after a point
+    public bool GameOver = false;
 
     // Constructor - lots of assignments here, keep same param names
     public twoPlayer(GraphicsDevice graphics, SpriteBatch spriteBatch, ContentManager content, SpriteFont _leftPoints, SpriteFont _rightPoints, Texture2D _ballTexture, Texture2D _leftPaddleTexture, Texture2D _middleLineTexture, Song _pointScored, Song _bounceOne, Song _bounceTwo)
@@ -122,11 +123,11 @@ public class twoPlayer : Scene
         float rightTextWidth = 0f;
         if (leftPoints != null)
         {
-            leftTextWidth = leftPoints.MeasureString("3").X;
+            leftTextWidth = leftPoints.MeasureString(leftLives.ToString()).X;
         }
         if (rightPoints != null)
         {
-            rightTextWidth = rightPoints.MeasureString("3").X;
+            rightTextWidth = rightPoints.MeasureString(rightLives.ToString()).X;
         }
 
         leftFontPos = new Vector2((float)screenWidth / 2f - leftTextWidth / 2f - 200f, 100f);
@@ -140,8 +141,6 @@ public class twoPlayer : Scene
     {
         // Intentionally left blank (placeholder for content loading)
     }
-
-    public bool GameOver { get; private set; } = false;
 
     public override void Update(GameTime gameTime)
     {
@@ -178,7 +177,7 @@ public class twoPlayer : Scene
             if (leftLives == 0)
             {
                 GameOver = true;
-                winner = 1;
+                winner = 2;
             }
         }
         else if (ballPosition.X > (float)VIRTUAL_WIDTH + 2f * (float)currentBallW)
@@ -190,7 +189,7 @@ public class twoPlayer : Scene
             if (rightLives == 0)
             {
                 GameOver = true;
-                winner = 2;
+                winner = 1;
             }
         }
 
@@ -292,7 +291,7 @@ public class twoPlayer : Scene
     {
         // Do not clear here because Game1.Draw clears the screen already (kept like before)
         int midW = (middleLineTexture != null) ? middleLineTexture.Width : 0;
-        _spriteBatch.Draw(middleLineTexture, new Vector2((float)VIRTUAL_WIDTH / 2f - (float)midW / 2f, 0f), Color.White);
+        _spriteBatch.Draw(middleLineTexture, new Vector2((float)VIRTUAL_WIDTH / 2f - (float)midW / 2f, 0f), Color.Gray);
 
         _spriteBatch.Draw(leftPaddleTexture, leftPaddlePosition, Color.White);
         _spriteBatch.Draw(leftPaddleTexture, rightPaddlePosition, Color.White);

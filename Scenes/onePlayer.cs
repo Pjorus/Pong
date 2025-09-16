@@ -50,6 +50,7 @@ public class onePlayer : Scene
     private bool ballIsPaused = false;
     private float respawnTimer = 0f;
     private float respawnDelay = 1.0f;
+    public bool GameOver = false;
 
     public onePlayer(GraphicsDevice graphics, SpriteBatch spriteBatch, ContentManager content, SpriteFont _points, SpriteFont _AIpoints, Texture2D _ballTexture, Texture2D _paddleTexture, Texture2D _middleLineTexture, Song _pointScored, Song _bounceOne, Song _bounceTwo)
     {
@@ -98,8 +99,8 @@ public class onePlayer : Scene
 
         float leftTextWidth = 0f;
         float rightTextWidth = 0f;
-        if (points != null) leftTextWidth = points.MeasureString("3").X;
-        if (AIpoints != null) rightTextWidth = AIpoints.MeasureString("3").X;
+        if (points != null) leftTextWidth = points.MeasureString(playerLives.ToString()).X;
+        if (AIpoints != null) rightTextWidth = AIpoints.MeasureString(AILives.ToString()).X;
 
         fontPos = new Vector2(screenWidth / 2f - leftTextWidth - 150f, 100f);
         fontPosAI = new Vector2(screenWidth / 2f - rightTextWidth + 300f, 100f);
@@ -110,8 +111,6 @@ public class onePlayer : Scene
     private void LoadContent()
     {
     }
-
-    public bool GameOver { get; private set; } = false;
 
     public override void Update(GameTime gameTime)
     {

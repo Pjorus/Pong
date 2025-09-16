@@ -17,6 +17,9 @@ public class TitleScene : Scene
     private double _blinkTimer = 0;
     private bool _showText = true;
     private int _selectedOption = 1;
+    public bool RequestStartGame = false;
+    private double _inputDelayTimer = 0;
+    private bool _inputDelayActive = true;
 
     public TitleScene(GraphicsDevice graphics, SpriteBatch spriteBatch, SpriteFont font, Song backgroundMusic, SpriteFont titleFont)
     {
@@ -26,16 +29,16 @@ public class TitleScene : Scene
         _backGroundMusic = backgroundMusic;
         _titleFont = titleFont;
         LoadContent();
+    _inputDelayTimer = 0;
+    _inputDelayActive = true;
     }
 
     private void LoadContent()
     {
         MediaPlayer.IsRepeating = true;
-        MediaPlayer.Volume = 0.0f;
+        MediaPlayer.Volume = 0.5f;
         MediaPlayer.Play(_backGroundMusic);
     }
-
-    public bool RequestStartGame { get; private set; } = false;
 
     public int SelectedOption => _selectedOption;
 
@@ -46,6 +49,16 @@ public class TitleScene : Scene
         {
             _showText = !_showText;
             _blinkTimer = 0;
+        }
+
+        if (_inputDelayActive)
+        {
+            _inputDelayTimer += gameTime.ElapsedGameTime.TotalSeconds;
+            if (_inputDelayTimer >= 1.0)
+            {
+                _inputDelayActive = false;
+            }
+            return;
         }
 
         if (Keyboard.GetState().IsKeyDown(Keys.Up) || Keyboard.GetState().IsKeyDown(Keys.W))
@@ -70,24 +83,28 @@ public class TitleScene : Scene
         // Do not call _spriteBatch.Begin() here
         _graphics.Clear(Color.Black);
 
-        _spriteBatch.DrawString(_font, "PONG", new Vector2(_graphics.Viewport.Width / 2 - _font.MeasureString("PONG").X, 100), Color.White);
+
+    // Centered X position helper
+    float CenterX(string text, SpriteFont font) => (_graphics.Viewport.Width - font.MeasureString(text).X) / 2f;
+
+    _spriteBatch.DrawString(_font, "PONG", new Vector2(CenterX("PONG", _font)/2, 100), Color.White);
 
         if (_showText && _selectedOption == 1)
         {
-            _spriteBatch.DrawString(_titleFont, "1 PLAYER", new Vector2(_graphics.Viewport.Width / 2 - _titleFont.MeasureString("1 PLAYER").X, 700), Color.White);
+            _spriteBatch.DrawString(_titleFont, "1 PLAYER", new Vector2(CenterX("1 PLAYER", _titleFont)/2, 700), Color.White);
         }
         else if (_showText && _selectedOption == 2)
         {
-            _spriteBatch.DrawString(_titleFont, "2 PLAYER", new Vector2(_graphics.Viewport.Width / 2 - _titleFont.MeasureString("2 PLAYER").X, 800), Color.White);
+            _spriteBatch.DrawString(_titleFont, "2 PLAYER", new Vector2(CenterX("2 PLAYER", _titleFont)/2, 800), Color.White);
         }
 
         if(_selectedOption == 1)
         {
-            _spriteBatch.DrawString(_titleFont, "2 PLAYER", new Vector2(_graphics.Viewport.Width / 2 - _titleFont.MeasureString("2 PLAYER").X, 800), Color.Gray);
+            _spriteBatch.DrawString(_titleFont, "2 PLAYER", new Vector2(CenterX("2 PLAYER", _titleFont)/2, 800), Color.Gray);
         }
         else if(_selectedOption == 2)
         {
-            _spriteBatch.DrawString(_titleFont, "1 PLAYER", new Vector2(_graphics.Viewport.Width / 2 - _titleFont.MeasureString("1 PLAYER").X, 700), Color.Gray);
+            _spriteBatch.DrawString(_titleFont, "1 PLAYER", new Vector2(CenterX("1 PLAYER", _titleFont)/2, 700), Color.Gray);
         }
     }
 }

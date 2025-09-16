@@ -85,15 +85,35 @@ public class Game1 : Game
             if (titleScene.SelectedOption == 1)
             {
                 _currentScene = new onePlayer(GraphicsDevice, _spriteBatch, Content, leftPoints, leftPoints, ballTexture, leftPaddleTexture, middleLineTexture, pointScored, bounceOne, bounceTwo);
+                titleScene.RequestStartGame = false;
             }
             else if (titleScene.SelectedOption == 2)
             {
                 _currentScene = new twoPlayer(GraphicsDevice, _spriteBatch, Content, leftPoints, leftPoints, ballTexture, leftPaddleTexture, middleLineTexture, pointScored, bounceOne, bounceTwo);
+                titleScene.RequestStartGame = false;
             }
         }
-        else if (_currentScene is onePlayer gameScene && gameScene.GameOver)
+        else if (_currentScene is onePlayer onePlayer && onePlayer.GameOver)
         {
-            //_currentScene = new endScreen(gameWon)
+            bool gameWon = onePlayer.gameWon;
+            int gameWinner = 0;
+            _currentScene = new endScreen(GraphicsDevice, _spriteBatch, _font, backgroundMusic, _titleFont, gameWon, gameWinner);
+
+            onePlayer.GameOver = false;
+            onePlayer.gameWon = false;
+        }
+        else if (_currentScene is twoPlayer twoPlayer && twoPlayer.GameOver)
+        {
+            int gameWinner = twoPlayer.winner;
+            bool gameWon = false;
+            _currentScene = new endScreen(GraphicsDevice, _spriteBatch, _font, backgroundMusic, _titleFont, gameWon, gameWinner);
+
+            twoPlayer.GameOver = false;
+            twoPlayer.winner = 0;
+        }
+        else if (_currentScene is endScreen endScreen && endScreen.RequestTitleScreen)
+        {
+            _currentScene = new TitleScene(GraphicsDevice, _spriteBatch, _font, backgroundMusic, _titleFont);
         }
         else
         {

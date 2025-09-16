@@ -18,14 +18,18 @@ public class endScreen : Scene
     private bool _showText = true;
 
     private bool gameWon = false;
+    public bool RequestTitleScreen = false;
+    int gameWinner = 0;
 
-    public endScreen(GraphicsDevice graphics, SpriteBatch spriteBatch, SpriteFont font, Song backgroundMusic, SpriteFont titleFont)
+    public endScreen(GraphicsDevice graphics, SpriteBatch spriteBatch, SpriteFont font, Song backgroundMusic, SpriteFont titleFont, bool _gameWon, int _gameWinner)
     {
         _graphics = graphics;
         _spriteBatch = spriteBatch;
         _font = font;
         _backGroundMusic = backgroundMusic;
-        titleFont = _titleFont;
+        _titleFont = titleFont;
+        gameWon = _gameWon;
+        gameWinner = _gameWinner;
         LoadContent();
     }
 
@@ -50,34 +54,45 @@ public class endScreen : Scene
         if (Keyboard.GetState().IsKeyDown(Keys.Enter))
         {
             MediaPlayer.Stop();
-            MediaPlayer.IsRepeating = true;
-            RequestStartGame = true;
+            MediaPlayer.IsRepeating = false;
+            RequestTitleScreen = true;
         }
     }
 
     public override void Draw(GameTime gameTime)
     {
-        _graphics.Clear(Color.DarkBlue);
-
-        _spriteBatch.Begin();
-
-
-        if(gameWon)
+        if (gameWon && gameWinner == 0)
         {
             // You won
-            _spriteBatch.DrawString(_titleFont, "You Won! :-)", new Vector2(400, 800), Color.White);
+            _spriteBatch.DrawString(_titleFont, "You Won! :-)", new Vector2(_graphics.Viewport.Width / 2 - _titleFont.MeasureString("You Won! :-)").X, 400), Color.White);
         }
-        else if (gameWon == false)
+        else if (gameWon == false && gameWinner == 0)
         {
             // You lost
-            _spriteBatch.DrawString(_titleFont, "You Lost... :-(", new Vector2(400, 800), Color.White);
+            _spriteBatch.DrawString(_titleFont, "You Lost... :-(", new Vector2(_graphics.Viewport.Width / 2 - _titleFont.MeasureString("You Lost... :-(").X, 400), Color.White);
         }
 
-        _spriteBatch.DrawString(_titleFont, "PONG", new Vector2(400, 800), Color.White);
+
+
+        if (gameWinner == 1)
+        {
+            // Player 1 won
+            _spriteBatch.DrawString(_titleFont, "Left Player Wins! :-)", new Vector2(_graphics.Viewport.Width / 2 - _titleFont.MeasureString("Left Player Wins! :-)").X, 400), Color.White);
+        }
+        else if (gameWinner == 2)
+        {
+            // Player 2 won
+            _spriteBatch.DrawString(_titleFont, "Right Player Wins! :-)", new Vector2(_graphics.Viewport.Width / 2 - _titleFont.MeasureString("Right Player Wins! :-)").X, 400), Color.White);
+        }
+
+
+
+        _spriteBatch.DrawString(_font, "PONG", new Vector2(_graphics.Viewport.Width / 2 - _font.MeasureString("PONG").X, 100), Color.White);
+
         if (_showText)
         {
-            _spriteBatch.DrawString(_font, "Press Enter to Start", new Vector2(620, 700), Color.White);
+            _spriteBatch.DrawString(_titleFont, "Press Enter to Restart", new Vector2(_graphics.Viewport.Width / 2 - _titleFont.MeasureString("Press Enter to Restart").X, 800), Color.White);
         }
-        _spriteBatch.End();
+        
     }
 }
