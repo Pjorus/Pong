@@ -37,7 +37,7 @@ public class twoPlayer : Scene
 
     // Middle line and speed
     private Texture2D middleLineTexture;
-    private float gameSpeeder = 1.0001f;
+    private float gameSpeeder = 1.0003f;
 
     // Fonts and score
     private SpriteFont leftPoints;
@@ -247,12 +247,22 @@ public class twoPlayer : Scene
         Rectangle leftPaddle = new Rectangle((int)leftPaddlePosition.X, (int)leftPaddlePosition.Y, pW, paddleH);
         Rectangle ballRect = new Rectangle((int)ballPosition.X, (int)ballPosition.Y, currentBallW, currentBallH);
 
-        if (leftPaddle.Intersects(ballRect) || rightPaddle.Intersects(ballRect))
+        // Left paddle collision
+        if (leftPaddle.Intersects(ballRect) && ballVelocity.X < 0)
         {
-            // flip X and add some Y randomness
-            ballVelocity = new Vector2(ballVelocity.X * -1f, ballVelocity.Y + (float)rng.Next(-200, 200));
+            ballPosition.X = leftPaddle.X + leftPaddleTexture.Width;
+            ballVelocity = new Vector2(Math.Abs(ballVelocity.X), ballVelocity.Y + rng.Next(-250, 250));
             PlayBounce();
         }
+
+        // Right paddle collision
+        if (rightPaddle.Intersects(ballRect) && ballVelocity.X > 0)
+        {
+            ballPosition.X = rightPaddle.X - ballTexture.Width;
+            ballVelocity = new Vector2(-Math.Abs(ballVelocity.X), ballVelocity.Y + rng.Next(-250, 250));
+            PlayBounce();
+        }
+
 
         // speed up ball slightly each update (naive approach)
         ballVelocity = new Vector2(ballVelocity.X * gameSpeeder, ballVelocity.Y * gameSpeeder);

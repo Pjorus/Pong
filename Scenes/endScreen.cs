@@ -64,12 +64,12 @@ public class endScreen : Scene
         if (gameWon && gameWinner == 0)
         {
             // You won
-            _spriteBatch.DrawString(_titleFont, "You Won! :-)", new Vector2(_graphics.Viewport.Width / 2 - _titleFont.MeasureString("You Won! :-)").X, 400), Color.White);
+            _spriteBatch.DrawString(_titleFont, "You Won! :-)", new Vector2(_graphics.Viewport.Width / 2 - _titleFont.MeasureString("You Won! :-)").X / 2, 400), Color.White);
         }
         else if (gameWon == false && gameWinner == 0)
         {
             // You lost
-            _spriteBatch.DrawString(_titleFont, "You Lost... :-(", new Vector2(_graphics.Viewport.Width / 2 - _titleFont.MeasureString("You Lost... :-(").X, 400), Color.White);
+            _spriteBatch.DrawString(_titleFont, "You Lost... :-(", new Vector2(_graphics.Viewport.Width / 2 - _titleFont.MeasureString("You Lost... :-(").X, 400) /2, Color.White);
         }
 
 
@@ -77,21 +77,21 @@ public class endScreen : Scene
         if (gameWinner == 1)
         {
             // Player 1 won
-            _spriteBatch.DrawString(_titleFont, "Left Player Wins! :-)", new Vector2(_graphics.Viewport.Width / 2 - _titleFont.MeasureString("Left Player Wins! :-)").X, 400), Color.White);
+            _spriteBatch.DrawString(_titleFont, "Left Player Wins! :-)", new Vector2(_graphics.Viewport.Width / 2 - _titleFont.MeasureString("Left Player Wins! :-)").X/2, 400), Color.White);
         }
         else if (gameWinner == 2)
         {
             // Player 2 won
-            _spriteBatch.DrawString(_titleFont, "Right Player Wins! :-)", new Vector2(_graphics.Viewport.Width / 2 - _titleFont.MeasureString("Right Player Wins! :-)").X, 400), Color.White);
+            _spriteBatch.DrawString(_titleFont, "Right Player Wins! :-)", new Vector2(_graphics.Viewport.Width / 2 - _titleFont.MeasureString("Right Player Wins! :-)").X/2, 400), Color.White);
         }
 
 
 
-        _spriteBatch.DrawString(_font, "PONG", new Vector2(_graphics.Viewport.Width / 2 - _font.MeasureString("PONG").X, 100), Color.White);
+        _spriteBatch.DrawString(_font, "PONG", new Vector2(_graphics.Viewport.Width / 2 - _font.MeasureString("PONG").X/2, 100), Color.White);
 
         if (_showText)
         {
-            _spriteBatch.DrawString(_titleFont, "Press Enter to Restart", new Vector2(_graphics.Viewport.Width / 2 - _titleFont.MeasureString("Press Enter to Restart").X, 800), Color.White);
+            _spriteBatch.DrawString(_titleFont, "Press Enter to Restart", new Vector2(_graphics.Viewport.Width / 2 - _titleFont.MeasureString("Press Enter to Restart").X/2, 800), Color.White);
         }
         
     }

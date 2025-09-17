@@ -30,7 +30,7 @@ public class onePlayer : Scene
     private Vector2 paddleAIStartPosition;
     private float paddleAIVelocity = 7;
     private Texture2D middleLineTexture;
-    private float gameSpeeder = 1.0001f;
+    private float gameSpeeder = 1.0003f;
 
     private SpriteFont points;
     private SpriteFont AIpoints;
@@ -228,9 +228,19 @@ public class onePlayer : Scene
         Rectangle balk = new Rectangle((int)paddlePosition.X, (int)paddlePosition.Y, pW, paddleH);
         Rectangle ballRect = new Rectangle((int)ballPosition.X, (int)ballPosition.Y, currentBallW, currentBallH);
 
-        if (balk.Intersects(ballRect) && balk.X + paddleTexture.Width >= ballPosition.X || balkAI.Intersects(ballRect) && balkAI.X <= ballPosition.X + ballTexture.Width)
+        // Player paddle collision
+        if (balk.Intersects(ballRect) && balk.X + paddleTexture.Width >= ballPosition.X)
         {
-            ballVelocity = new Vector2(ballVelocity.X * -1, ballVelocity.Y + rng.Next(-250, 250));
+            ballPosition.X = balk.X + paddleTexture.Width; // Move ball to the right edge of the paddle
+            ballVelocity = new Vector2(Math.Abs(ballVelocity.X), ballVelocity.Y + rng.Next(-250, 250));
+            PlayBounce();
+        }
+
+        // AI paddle collision
+        if (balkAI.Intersects(ballRect) && balkAI.X <= ballPosition.X + ballTexture.Width)
+        {
+            ballPosition.X = balkAI.X - ballTexture.Width; // Move ball to the left edge of the AI paddle
+            ballVelocity = new Vector2(-Math.Abs(ballVelocity.X), ballVelocity.Y + rng.Next(-250, 250));
             PlayBounce();
         }
 

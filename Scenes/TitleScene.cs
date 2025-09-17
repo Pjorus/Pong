@@ -84,27 +84,24 @@ public class TitleScene : Scene
         _graphics.Clear(Color.Black);
 
 
-    // Centered X position helper
-    float CenterX(string text, SpriteFont font) => (_graphics.Viewport.Width - font.MeasureString(text).X) / 2f;
-
-    _spriteBatch.DrawString(_font, "PONG", new Vector2(CenterX("PONG", _font)/2, 100), Color.White);
+    _spriteBatch.DrawString(_font, "PONG", new Vector2(_graphics.Viewport.Width / 2 - _font.MeasureString("PONG").X/2, 100), Color.White);
 
         if (_showText && _selectedOption == 1)
         {
-            _spriteBatch.DrawString(_titleFont, "1 PLAYER", new Vector2(CenterX("1 PLAYER", _titleFont)/2, 700), Color.White);
+            _spriteBatch.DrawString(_titleFont, "1 PLAYER", new Vector2(_graphics.Viewport.Width / 2 - _titleFont.MeasureString("1 Player").X/2, 700), Color.White);
         }
         else if (_showText && _selectedOption == 2)
         {
-            _spriteBatch.DrawString(_titleFont, "2 PLAYER", new Vector2(CenterX("2 PLAYER", _titleFont)/2, 800), Color.White);
+            _spriteBatch.DrawString(_titleFont, "2 PLAYER", new Vector2(_graphics.Viewport.Width / 2 - _titleFont.MeasureString("2 Player").X/2, 800), Color.White);
         }
 
         if(_selectedOption == 1)
         {
-            _spriteBatch.DrawString(_titleFont, "2 PLAYER", new Vector2(CenterX("2 PLAYER", _titleFont)/2, 800), Color.Gray);
+            _spriteBatch.DrawString(_titleFont, "2 PLAYER", new Vector2(_graphics.Viewport.Width / 2 - _titleFont.MeasureString("2 Player").X/2, 800), Color.Gray);
         }
         else if(_selectedOption == 2)
         {
-            _spriteBatch.DrawString(_titleFont, "1 PLAYER", new Vector2(CenterX("1 PLAYER", _titleFont)/2, 700), Color.Gray);
+            _spriteBatch.DrawString(_titleFont, "1 PLAYER", new Vector2(_graphics.Viewport.Width / 2 - _titleFont.MeasureString("1 Player").X/2, 700), Color.Gray);
         }
     }
 }
