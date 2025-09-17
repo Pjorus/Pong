@@ -31,17 +31,15 @@ public class Game1 : Game
 
     private Matrix _scaleMatrix;
 
-    //private bool gameWon;
-
     public Game1()
     {
         _graphics = new GraphicsDeviceManager(this);
 
-        // Set resolution dynamically
+        // Set resolution no matter the screen size (1440p, 1080p, etc.)
         _graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
         _graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
 
-        // Fullscreen mode
+        // Set the game to fullscreen
         _graphics.IsFullScreen = true;
 
         Content.RootDirectory = "Content";
@@ -52,10 +50,10 @@ public class Game1 : Game
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-        // Calculate the scaling matrix
-        float scaleX = (float)_graphics.GraphicsDevice.Viewport.Width / 1920f; // Internal width
-        float scaleY = (float)_graphics.GraphicsDevice.Viewport.Height / 1080f; // Internal height
-        float scale = Math.Min(scaleX, scaleY); // Maintain aspect ratio
+        // Set value and calculate the screen resolution scaling
+        float scaleX = _graphics.GraphicsDevice.Viewport.Width / 1920f;
+        float scaleY = _graphics.GraphicsDevice.Viewport.Height / 1080f;
+        float scale = Math.Min(scaleX, scaleY);
         _scaleMatrix = Matrix.CreateScale(scale);
 
         // Load fonts and music
@@ -64,7 +62,7 @@ public class Game1 : Game
         _titleFont = Content.Load<SpriteFont>("titleScreen");
 
 
-        // Load Two Player Scene assets
+        // Load Game Scenes assets
         leftPoints = Content.Load<SpriteFont>("Score");
         ballTexture = Content.Load<Texture2D>("ball");
         leftPaddleTexture = Content.Load<Texture2D>("balk");
@@ -80,38 +78,40 @@ public class Game1 : Game
 
     protected override void Update(GameTime gameTime)
     {
-        if (_currentScene is TitleScene titleScene && titleScene.RequestStartGame)
+        if (_currentScene is TitleScene titleScene && titleScene.RequestStartGame) //Check if the current scene is the title scene and if the Player wants to start the game
         {
-            if (titleScene.SelectedOption == 1)
+            if (titleScene.SelectedOption == 1) // Player selected 1 Player Mode
             {
                 _currentScene = new onePlayer(GraphicsDevice, _spriteBatch, Content, leftPoints, leftPoints, ballTexture, leftPaddleTexture, middleLineTexture, pointScored, bounceOne, bounceTwo);
-                titleScene.RequestStartGame = false;
+                titleScene.RequestStartGame = false; // Reset the request to start game, so it doesn't trigger immediately when the player returns to the title screen after a game
             }
-            else if (titleScene.SelectedOption == 2)
+            else if (titleScene.SelectedOption == 2) // Player selected 2 Player Mode
             {
                 _currentScene = new twoPlayer(GraphicsDevice, _spriteBatch, Content, leftPoints, leftPoints, ballTexture, leftPaddleTexture, middleLineTexture, pointScored, bounceOne, bounceTwo);
-                titleScene.RequestStartGame = false;
+                titleScene.RequestStartGame = false; // Reset the request to start game, so it doesn't trigger immediately when the player returns to the title screen after a game
             }
         }
-        else if (_currentScene is onePlayer onePlayer && onePlayer.GameOver)
+        else if (_currentScene is onePlayer onePlayer && onePlayer.GameOver) // Check if the Players game against the AI is over
         {
-            bool gameWon = onePlayer.gameWon;
-            int gameWinner = 0;
+            bool gameWon = onePlayer.gameWon; // store the result of the game (gameWon = true if the Player won, false if the AI won)
+            int gameWinner = 0; // Set to 0 because the Endscreen scene expects an int for gameWinner, but in 1 Player Mode it's not used, so a value of 0 is submitted
             _currentScene = new endScreen(GraphicsDevice, _spriteBatch, _font, backgroundMusic, _titleFont, gameWon, gameWinner);
 
+            // Reset the onePlayer scene's GameOver and gameWon variables for when the Player wants to play again
             onePlayer.GameOver = false;
             onePlayer.gameWon = false;
         }
-        else if (_currentScene is twoPlayer twoPlayer && twoPlayer.GameOver)
+        else if (_currentScene is twoPlayer twoPlayer && twoPlayer.GameOver) // Check if the Players game in 2 Player Mode is over
         {
-            int gameWinner = twoPlayer.winner;
-            bool gameWon = false;
+            int gameWinner = twoPlayer.winner; // Get the result of the game (1 = Left Player won, 2 = Right Player won)
+            bool gameWon = false; // Set to 0 because the Endscreen scene expects a bool for gameWon, but in 2 Player Mode it's not used, so a default value of false is submitted
             _currentScene = new endScreen(GraphicsDevice, _spriteBatch, _font, backgroundMusic, _titleFont, gameWon, gameWinner);
 
+            // Reset the twoPlayer scene's GameOver and winner variables for when the Players want to play again
             twoPlayer.GameOver = false;
             twoPlayer.winner = 0;
         }
-        else if (_currentScene is endScreen endScreen && endScreen.RequestTitleScreen)
+        else if (_currentScene is endScreen endScreen && endScreen.RequestTitleScreen) // Check if the current scene is the end screen and if the Player wants to return to the title screen
         {
             _currentScene = new TitleScene(GraphicsDevice, _spriteBatch, _font, backgroundMusic, _titleFont);
         }
@@ -126,7 +126,7 @@ public class Game1 : Game
     {
         GraphicsDevice.Clear(Color.Black);
 
-        // Begin the SpriteBatch with the scaling matrix
+        // Set the default resolution scaling
         _spriteBatch.Begin(transformMatrix: _scaleMatrix);
 
         _currentScene.Draw(gameTime);

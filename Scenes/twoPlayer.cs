@@ -9,11 +9,8 @@ namespace Pong.Scenes;
 
 public class twoPlayer : Scene
 {
-    // Virtual resolution constants (kept the same)
     private const int VIRTUAL_WIDTH = 1920;
     private const int VIRTUAL_HEIGHT = 1080;
-
-    // Graphics and content
     private GraphicsDevice _graphics;
     private SpriteBatch _spriteBatch;
     private ContentManager _content;
@@ -35,7 +32,7 @@ public class twoPlayer : Scene
     private Vector2 rightPaddleStartPosition;
     private float rightPaddleVelocity = 7;
 
-    // Middle line and speed
+    // Middle line and game speed increase
     private Texture2D middleLineTexture;
     private float gameSpeeder = 1.0003f;
 
@@ -59,55 +56,27 @@ public class twoPlayer : Scene
     public bool twoPlayers = true;
     public int winner = 0; // 1 = left player wins, 2 = right player wins
 
-    // --- Respawn / delay fields (new) ---
+    // Respawn delay
     private bool ballIsPaused = false;
     private float respawnTimer = 0f;
     private float respawnDelay = 1.0f; // seconds to wait after a point
-    public bool GameOver = false;
+    public bool GameOver = false; // Set to public to be accessed in Game1.cs to determine when to switch to the end screen
 
-    // Constructor - lots of assignments here, keep same param names
+
     public twoPlayer(GraphicsDevice graphics, SpriteBatch spriteBatch, ContentManager content, SpriteFont _leftPoints, SpriteFont _rightPoints, Texture2D _ballTexture, Texture2D _leftPaddleTexture, Texture2D _middleLineTexture, Song _pointScored, Song _bounceOne, Song _bounceTwo)
     {
-        // store references
+        // Load all assets and set them to variables
         _graphics = graphics;
         _spriteBatch = spriteBatch;
         _content = content;
 
-        // virtual screen dims (use constants)
         int screenWidth = VIRTUAL_WIDTH;
         int screenHeight = VIRTUAL_HEIGHT;
 
-        // store textures/sounds first so we can use their sizes below
         ballTexture = _ballTexture;
+
         leftPaddleTexture = _leftPaddleTexture;
         middleLineTexture = _middleLineTexture;
-
-        // compute start positions carefully (take widths/heights into account)
-        int bW = 0;
-        int bH = 0;
-        if (ballTexture != null)
-        {
-            bW = ballTexture.Width;
-            bH = ballTexture.Height;
-        }
-
-        ballStartPosition = new Vector2((float)screenWidth / 2f - (float)bW / 2f, (float)screenHeight / 2f - (float)bH / 2f);
-        ballPosition = new Vector2(ballStartPosition.X, ballStartPosition.Y);
-        ballVelocity = new Vector2(800f, (float)rng.Next(-200, 200));
-
-        int pW = 0;
-        int pH = 0;
-        if (leftPaddleTexture != null)
-        {
-            pW = leftPaddleTexture.Width;
-            pH = leftPaddleTexture.Height;
-        }
-
-        leftPaddlePosition = new Vector2(0f, (float)screenHeight / 2f - (float)pH / 2f);
-        leftPaddleStartPosition = new Vector2(leftPaddlePosition.X, leftPaddlePosition.Y);
-
-        rightPaddlePosition = new Vector2((float)screenWidth - (float)(pW == 0 ? 38 : pW), (float)screenHeight / 2f - (float)pH / 2f);
-        rightPaddleStartPosition = new Vector2(rightPaddlePosition.X, rightPaddlePosition.Y);
 
         // fonts
         leftPoints = _leftPoints;
@@ -118,7 +87,37 @@ public class twoPlayer : Scene
         bounceOne = _bounceOne;
         bounceTwo = _bounceTwo;
 
-        // compute font positions (student-style: do this in a clumsy way)
+        // Store the texture dimensions of the ball
+        int bW = 0;
+        int bH = 0;
+        if (ballTexture != null)
+        {
+            bW = ballTexture.Width;
+            bH = ballTexture.Height;
+        }
+
+        // Set starting position of the ball in the center of the screen and give it an initial velocity
+        ballStartPosition = new Vector2((float)screenWidth / 2f - (float)bW / 2f, (float)screenHeight / 2f - (float)bH / 2f);
+        ballPosition = new Vector2(ballStartPosition.X, ballStartPosition.Y);
+        ballVelocity = new Vector2(800f, (float)rng.Next(-200, 200));
+
+        // Store the texture dimensions of the paddles
+        int pW = 0;
+        int pH = 0;
+        if (leftPaddleTexture != null)
+        {
+            pW = leftPaddleTexture.Width;
+            pH = leftPaddleTexture.Height;
+        }
+
+        // Set starting positions of paddles
+        leftPaddlePosition = new Vector2(0f, (float)screenHeight / 2f - (float)pH / 2f);
+        leftPaddleStartPosition = new Vector2(leftPaddlePosition.X, leftPaddlePosition.Y);
+
+        rightPaddlePosition = new Vector2((float)screenWidth - (float)(pW == 0 ? 38 : pW), (float)screenHeight / 2f - (float)pH / 2f);
+        rightPaddleStartPosition = new Vector2(rightPaddlePosition.X, rightPaddlePosition.Y);
+
+        // Set the positions for the Lives fonts
         float leftTextWidth = 0f;
         float rightTextWidth = 0f;
         if (leftPoints != null)
@@ -130,62 +129,59 @@ public class twoPlayer : Scene
             rightTextWidth = rightPoints.MeasureString(rightLives.ToString()).X;
         }
 
-        leftFontPos = new Vector2((float)screenWidth / 2f - leftTextWidth / 2f - 200f, 100f);
-        rightFontPos = new Vector2((float)screenWidth / 2f - rightTextWidth / 2f + 200f, 100f);
+        leftFontPos = new Vector2(screenWidth / 2f - leftTextWidth / 2f - 200f, 100f);
+        rightFontPos = new Vector2(screenWidth / 2f - rightTextWidth / 2f + 200f, 100f);
 
-        // call loadcontent (empty, but keep for parity)
-        LoadContent();
-    }
-
-    private void LoadContent()
-    {
-        // Intentionally left blank (placeholder for content loading)
     }
 
     public override void Update(GameTime gameTime)
     {
-        // get keyboard state
         KeyboardState keyboard = Keyboard.GetState();
 
-        // delta time
         float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-        // If ball is paused after a point, count down the respawn timer and restore velocity when done
+        // Pause the ball for a set amount of time after a point is scored and the scene "resets"
         if (ballIsPaused)
         {
             respawnTimer += dt;
             if (respawnTimer >= respawnDelay)
             {
-                // resume ball with the same "normal" velocity used before
+                // Continue game after respawn delay
                 ballIsPaused = false;
                 respawnTimer = 0f;
-                ballVelocity = new Vector2(800f, (float)rng.Next(-200, 200));
+                ballVelocity = new Vector2(800f, rng.Next(-200, 200));
             }
         }
 
-        // move the ball (use elapsed seconds)
+        // Update the ball position
         ballPosition = new Vector2(ballPosition.X + ballVelocity.X * dt, ballPosition.Y + ballVelocity.Y * dt);
 
-        // scoring checks (use ball texture width if available)
+        // Get the texture Width  of the ball and store them in variables that can be used here
         int currentBallW = (ballTexture != null) ? ballTexture.Width : 0;
-        if (ballPosition.X < 0f - (2f * (float)currentBallW))
+
+        // Check if the ball goes past the left or right edge of the screen, and a point is scored (The Left Player or Right Player loses a life and the scene "resets")
+        if (ballPosition.X < 0f - (2f * currentBallW))
         {
             leftLives = leftLives - 1;
             ResetPositions();
             if (pointScored != null)
                 MediaPlayer.Play(pointScored);
+
+            // Check if the Left Player has no lives left and the game is over, the Right Player wins (So winner is set to 2)
             if (leftLives == 0)
             {
                 GameOver = true;
                 winner = 2;
             }
         }
-        else if (ballPosition.X > (float)VIRTUAL_WIDTH + 2f * (float)currentBallW)
+        else if (ballPosition.X > VIRTUAL_WIDTH + 2f * currentBallW)
         {
             rightLives = rightLives - 1;
             ResetPositions();
             if (pointScored != null)
                 MediaPlayer.Play(pointScored);
+
+            // Check if the Right Player has no lives left and the game is over, the Left Player wins (So winner is set to 1)
             if (rightLives == 0)
             {
                 GameOver = true;
@@ -193,7 +189,7 @@ public class twoPlayer : Scene
             }
         }
 
-        // bounce off top and bottom using virtual height
+        // Check for ball collision with top and bottom of screen and if so, invert its Y velocity
         int currentBallH = (ballTexture != null) ? ballTexture.Height : 0;
         if (ballPosition.Y < 0f)
         {
@@ -201,18 +197,18 @@ public class twoPlayer : Scene
             ballVelocity = new Vector2(ballVelocity.X, ballVelocity.Y * -1f);
             PlayBounce();
         }
-        else if (ballPosition.Y > (float)VIRTUAL_HEIGHT - (float)currentBallH)
+        else if (ballPosition.Y > VIRTUAL_HEIGHT - currentBallH)
         {
-            ballPosition = new Vector2(ballPosition.X, (float)VIRTUAL_HEIGHT - (float)currentBallH);
+            ballPosition = new Vector2(ballPosition.X, VIRTUAL_HEIGHT - currentBallH);
             ballVelocity = new Vector2(ballVelocity.X, ballVelocity.Y * -1f);
             PlayBounce();
         }
 
-        // player controls (left player W/S)
+        // Controls for the Left Player (W for Up / S for Down)
         int paddleH = (leftPaddleTexture != null) ? leftPaddleTexture.Height : 0;
         if (keyboard.IsKeyDown(Keys.S))
         {
-            if (leftPaddlePosition.Y < (float)VIRTUAL_HEIGHT - (float)paddleH)
+            if (leftPaddlePosition.Y < VIRTUAL_HEIGHT - paddleH)
             {
                 leftPaddlePosition = new Vector2(leftPaddlePosition.X, leftPaddlePosition.Y + leftPaddleVelocity);
             }
@@ -225,10 +221,10 @@ public class twoPlayer : Scene
             }
         }
 
-        // right paddle controls (Up/Down)
+        // Control for the Right Player (Up-Arrow for Up / Down-Arrow for Down)
         if (keyboard.IsKeyDown(Keys.Down))
         {
-            if (rightPaddlePosition.Y < (float)VIRTUAL_HEIGHT - (float)paddleH)
+            if (rightPaddlePosition.Y < VIRTUAL_HEIGHT - paddleH)
             {
                 rightPaddlePosition = new Vector2(rightPaddlePosition.X, rightPaddlePosition.Y + rightPaddleVelocity);
             }
@@ -241,13 +237,13 @@ public class twoPlayer : Scene
             }
         }
 
-        // collision rectangles (build them manually)
+        // Create rectangles around the paddles and ball to check for collision
         int pW = (leftPaddleTexture != null) ? leftPaddleTexture.Width : 0;
         Rectangle rightPaddle = new Rectangle((int)rightPaddlePosition.X, (int)rightPaddlePosition.Y, pW, paddleH);
         Rectangle leftPaddle = new Rectangle((int)leftPaddlePosition.X, (int)leftPaddlePosition.Y, pW, paddleH);
         Rectangle ballRect = new Rectangle((int)ballPosition.X, (int)ballPosition.Y, currentBallW, currentBallH);
 
-        // Left paddle collision
+        // Check if the ball collides with the Left Players paddle and if so, invert its X velocity and add some random Y velocity
         if (leftPaddle.Intersects(ballRect) && ballVelocity.X < 0)
         {
             ballPosition.X = leftPaddle.X + leftPaddleTexture.Width;
@@ -255,7 +251,7 @@ public class twoPlayer : Scene
             PlayBounce();
         }
 
-        // Right paddle collision
+        // Check if the ball collides with the Right Players paddle and if so, invert its X velocity and add some random Y velocity
         if (rightPaddle.Intersects(ballRect) && ballVelocity.X > 0)
         {
             ballPosition.X = rightPaddle.X - ballTexture.Width;
@@ -264,28 +260,34 @@ public class twoPlayer : Scene
         }
 
 
-        // speed up ball slightly each update (naive approach)
+        // Slowly increase the speed of the ball and paddles over time
         ballVelocity = new Vector2(ballVelocity.X * gameSpeeder, ballVelocity.Y * gameSpeeder);
+        leftPaddleVelocity = leftPaddleVelocity * gameSpeeder;
+        rightPaddleVelocity = rightPaddleVelocity * gameSpeeder;
     }
 
     private void ResetPositions()
     {
+        // Get the texture dimensions of the ball and store them in variables that can be used here
         int cw = (ballTexture != null) ? ballTexture.Width : 0;
         int ch = (ballTexture != null) ? ballTexture.Height : 0;
-        ballPosition = new Vector2((float)VIRTUAL_WIDTH / 2f - (float)cw / 2f, (float)VIRTUAL_HEIGHT / 2f - (float)ch / 2f);
 
-        // NEW: pause the ball on reset, set velocity to zero and start the respawn timer
+        // Set the ball back to the center of the screen
+        ballPosition = new Vector2(VIRTUAL_WIDTH / 2f - cw / 2f, VIRTUAL_HEIGHT / 2f - ch / 2f);
+
+        // Pause the ball for the set amount of time after a point is scored and the scene "resets"
         ballVelocity = Vector2.Zero;
         ballIsPaused = true;
         respawnTimer = 0f;
 
+        // Reset paddles to their starting positions
         leftPaddlePosition = new Vector2(leftPaddleStartPosition.X, leftPaddleStartPosition.Y);
         rightPaddlePosition = new Vector2(rightPaddleStartPosition.X, rightPaddleStartPosition.Y);
     }
 
     private void PlayBounce()
     {
-        // choose which sound to play
+        // Randomly choose one of the two bounce sounds to play when the ball hits a paddle or the top/bottom of the screen
         int choice = rng.Next(1, 3);
         if (choice == 1)
         {
@@ -299,19 +301,20 @@ public class twoPlayer : Scene
 
     public override void Draw(GameTime gameTime)
     {
-        // Do not clear here because Game1.Draw clears the screen already (kept like before)
+        // Draw the game assets to the screen
         int midW = (middleLineTexture != null) ? middleLineTexture.Width : 0;
-        _spriteBatch.Draw(middleLineTexture, new Vector2((float)VIRTUAL_WIDTH / 2f - (float)midW / 2f, 0f), Color.Gray);
+        _spriteBatch.Draw(middleLineTexture, new Vector2(VIRTUAL_WIDTH / 2f - midW / 2f, 0f), Color.Gray);
 
         _spriteBatch.Draw(leftPaddleTexture, leftPaddlePosition, Color.White);
         _spriteBatch.Draw(leftPaddleTexture, rightPaddlePosition, Color.White);
 
-        // draw scores (student-style: no extra formatting)
+        
         if (leftPoints != null)
             _spriteBatch.DrawString(leftPoints, leftLives.ToString(), leftFontPos, Color.Gray);
         if (rightPoints != null)
             _spriteBatch.DrawString(rightPoints, rightLives.ToString(), rightFontPos, Color.Gray);
 
+        // Draw the ball last to ensure it appears above everything else
         _spriteBatch.Draw(ballTexture, ballPosition, Color.White);
     }
 }
