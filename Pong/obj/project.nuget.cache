@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+xH+ZpnzBuY=",
+  "dgSpecHash": "8Xco8sXxBfs=",
   "success": true,
-  "projectFilePath": "C:\\MonoGame\\Pong\\Pong\\Pong.csproj",
+  "projectFilePath": "C:\\MonoGame\\Pong\\Pong\\Pong\\Pong.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\joris\\.nuget\\packages\\microsoft.netcore.app\\2.1.30\\microsoft.netcore.app.2.1.30.nupkg.sha512",
     "C:\\Users\\joris\\.nuget\\packages\\microsoft.netcore.dotnetapphost\\2.1.30\\microsoft.netcore.dotnetapphost.2.1.30.nupkg.sha512",

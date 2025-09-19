@@ -34,6 +34,7 @@ public class onePlayer : Scene
 
     private SpriteFont points;
     private SpriteFont AIpoints;
+    private SpriteFont instructionsFont;
     private Vector2 fontPos;
     private Vector2 fontPosAI;
     private int playerLives = 3;
@@ -52,7 +53,7 @@ public class onePlayer : Scene
     private float respawnDelay = 1.0f;
     public bool GameOver = false; // Set to public to be accessed in Game1.cs to determine when to switch to the end screen
 
-    public onePlayer(GraphicsDevice graphics, SpriteBatch spriteBatch, ContentManager content, SpriteFont _points, SpriteFont _AIpoints, Texture2D _ballTexture, Texture2D _paddleTexture, Texture2D _middleLineTexture, Song _pointScored, Song _bounceOne, Song _bounceTwo)
+    public onePlayer(GraphicsDevice graphics, SpriteBatch spriteBatch, ContentManager content, SpriteFont _points, SpriteFont _AIpoints, Texture2D _ballTexture, Texture2D _paddleTexture, Texture2D _middleLineTexture, Song _pointScored, Song _bounceOne, Song _bounceTwo, SpriteFont _instructionsFont)
     {
         // Load all assets and set them to variables
         _graphics = graphics;
@@ -73,6 +74,7 @@ public class onePlayer : Scene
 
         points = _points;
         AIpoints = _AIpoints;
+        instructionsFont = _instructionsFont;
 
         // Store the texture dimensions of the ball
         int bW = 0;
@@ -328,7 +330,13 @@ public class onePlayer : Scene
         if (AIpoints != null)
             _spriteBatch.DrawString(AIpoints, AILives.ToString(), fontPosAI, Color.Gray);
 
+        // Draw instructions for the player
+        if (instructionsFont != null)
+        {
+            _spriteBatch.DrawString(instructionsFont, "W for Up\nS for Down", new Vector2(VIRTUAL_WIDTH / 4f, VIRTUAL_HEIGHT / 2f), Color.Gray);
+        }
+
         // Draw the ball last to ensure it appears above everything else
-        _spriteBatch.Draw(ballTexture, ballPosition, Color.White);
+            _spriteBatch.Draw(ballTexture, ballPosition, Color.White);
     }
 }

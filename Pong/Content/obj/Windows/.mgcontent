@@ -4,19 +4,21 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>c:/MonoGame/Pong/Pong/Content/arcade-beat-323176.mp3</File>
-    <File>c:/MonoGame/Pong/Pong/Content/balkGrow.png</File>
-    <File>c:/MonoGame/Pong/Pong/Content/balkwhite (1).png</File>
-    <File>c:/MonoGame/Pong/Pong/Content/ballGrow.png</File>
-    <File>c:/MonoGame/Pong/Pong/Content/ballwhite.png</File>
-    <File>c:/MonoGame/Pong/Pong/Content/bounceOne.mp3</File>
-    <File>c:/MonoGame/Pong/Pong/Content/bounceTwo.mp3</File>
-    <File>c:/MonoGame/Pong/Pong/Content/middleLineNew.png</File>
-    <File>c:/MonoGame/Pong/Pong/Content/Pedro - Pedro Pedro Pedro.mp3</File>
-    <File>c:/MonoGame/Pong/Pong/Content/pedro_pedro_pe.png</File>
-    <File>c:/MonoGame/Pong/Pong/Content/pointScored.mp3</File>
-    <File>c:/MonoGame/Pong/Pong/Content/Score.spritefont</File>
-    <File>c:/MonoGame/Pong/Pong/Content/titleScreen.spritefont</File>
+    <File>c:/MonoGame/Pong/Pong/Pong/Content/arcade-beat-323176.mp3</File>
+    <File>c:/MonoGame/Pong/Pong/Pong/Content/balkGrow.png</File>
+    <File>c:/MonoGame/Pong/Pong/Pong/Content/balkwhite (1).png</File>
+    <File>c:/MonoGame/Pong/Pong/Pong/Content/ballGrow.png</File>
+    <File>c:/MonoGame/Pong/Pong/Pong/Content/ballwhite.png</File>
+    <File>c:/MonoGame/Pong/Pong/Pong/Content/bounceOne.mp3</File>
+    <File>c:/MonoGame/Pong/Pong/Pong/Content/bounceTwo.mp3</File>
+    <File>c:/MonoGame/Pong/Pong/Pong/Content/Instructions.spritefont</File>
+    <File>c:/MonoGame/Pong/Pong/Pong/Content/middleLineNew.png</File>
+    <File>c:/MonoGame/Pong/Pong/Pong/Content/Pedro - Pedro Pedro Pedro.mp3</File>
+    <File>c:/MonoGame/Pong/Pong/Pong/Content/pedro_pedro_pe.png</File>
+    <File>c:/MonoGame/Pong/Pong/Pong/Content/pointScored.mp3</File>
+    <File>c:/MonoGame/Pong/Pong/Pong/Content/Score.spritefont</File>
+    <File>c:/MonoGame/Pong/Pong/Pong/Content/titleScreen.spritefont</File>
+    <File>c:/MonoGame/Pong/Pong/Pong/Content/VerticalMiddleLine.png</File>
   </SourceFiles>
   <DestFiles>
     <File>titleScreenMusic.mp3</File>
@@ -26,8 +28,10 @@
     <File>ball.png</File>
     <File xsi:nil="true" />
     <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File>middleLine.png</File>
     <File>PedroSong.mp3</File>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

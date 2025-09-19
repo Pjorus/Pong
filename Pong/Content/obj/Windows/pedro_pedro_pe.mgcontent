@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>c:/MonoGame/Pong/Pong/Content/pedro_pedro_pe.png</SourceFile>
-  <SourceTime>2025-09-15T18:58:50.5735456+02:00</SourceTime>
-  <DestFile>c:/MonoGame/Pong/Pong/Content/bin/Windows/pedro_pedro_pe.xnb</DestFile>
-  <DestTime>2025-09-15T19:04:42.1415545+02:00</DestTime>
+  <SourceFile>c:/MonoGame/Pong/Pong/Pong/Content/pedro_pedro_pe.png</SourceFile>
+  <SourceTime>2025-09-19T12:52:50.8588457+02:00</SourceTime>
+  <DestFile>c:/MonoGame/Pong/Pong/Pong/Content/bin/Windows/pedro_pedro_pe.xnb</DestFile>
+  <DestTime>2025-09-19T14:08:54.8080555+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2025-06-02T12:31:02+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

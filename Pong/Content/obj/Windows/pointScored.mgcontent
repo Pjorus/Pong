@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>c:/MonoGame/Pong/Pong/Content/pointScored.mp3</SourceFile>
-  <SourceTime>2025-09-15T18:58:50.5751573+02:00</SourceTime>
-  <DestFile>c:/MonoGame/Pong/Pong/Content/bin/Windows/pointScored.xnb</DestFile>
-  <DestTime>2025-09-15T19:04:42.2051663+02:00</DestTime>
+  <SourceFile>c:/MonoGame/Pong/Pong/Pong/Content/pointScored.mp3</SourceFile>
+  <SourceTime>2025-09-19T12:52:50.8608296+02:00</SourceTime>
+  <DestFile>c:/MonoGame/Pong/Pong/Pong/Content/bin/Windows/pointScored.xnb</DestFile>
+  <DestTime>2025-09-19T14:08:54.9665859+02:00</DestTime>
   <Importer>Mp3Importer</Importer>
   <ImporterTime>2025-06-02T12:31:02+02:00</ImporterTime>
   <Processor>SongProcessor</Processor>
@@ -15,6 +15,6 @@
   <Dependencies />
   <BuildAsset />
   <BuildOutput>
-    <string>c:/MonoGame/Pong/Pong/Content/bin/Windows/pointScored.wma</string>
+    <string>c:/MonoGame/Pong/Pong/Pong/Content/bin/Windows/pointScored.wma</string>
   </BuildOutput>
 </PipelineBuildEvent>

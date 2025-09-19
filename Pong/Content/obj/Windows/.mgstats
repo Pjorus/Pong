@@ -1,14 +1,16 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"c:/MonoGame/Pong/Pong/Content/arcade-beat-323176.mp3","c:/MonoGame/Pong/Pong/Content/bin/Windows/titleScreenMusic.xnb","SongProcessor","SongContent",4555755,134,0,4985085
-"c:/MonoGame/Pong/Pong/Content/balkGrow.png","c:/MonoGame/Pong/Pong/Content/bin/Windows/balkGrow.xnb","TextureProcessor","Texture2DContent",19345,262229,0,0196795
-"c:/MonoGame/Pong/Pong/Content/balkwhite (1).png","c:/MonoGame/Pong/Pong/Content/bin/Windows/balk.xnb","TextureProcessor","Texture2DContent",92,38997,0,0023409
-"c:/MonoGame/Pong/Pong/Content/ballGrow.png","c:/MonoGame/Pong/Pong/Content/bin/Windows/ballGrow.xnb","TextureProcessor","Texture2DContent",22493,262229,0,0052171
-"c:/MonoGame/Pong/Pong/Content/ballwhite.png","c:/MonoGame/Pong/Pong/Content/bin/Windows/ball.xnb","TextureProcessor","Texture2DContent",1267,16469,0,001203
-"c:/MonoGame/Pong/Pong/Content/bounceOne.mp3","c:/MonoGame/Pong/Pong/Content/bin/Windows/bounceOne.xnb","SongProcessor","SongContent",13886,127,0,058732
-"c:/MonoGame/Pong/Pong/Content/bounceTwo.mp3","c:/MonoGame/Pong/Pong/Content/bin/Windows/bounceTwo.xnb","SongProcessor","SongContent",9086,127,0,053824
-"c:/MonoGame/Pong/Pong/Content/middleLineNew.png","c:/MonoGame/Pong/Pong/Content/bin/Windows/middleLine.xnb","TextureProcessor","Texture2DContent",3237,229045,0,0042811
-"c:/MonoGame/Pong/Pong/Content/Pedro - Pedro Pedro Pedro.mp3","c:/MonoGame/Pong/Pong/Content/bin/Windows/PedroSong.xnb","SongProcessor","SongContent",7133574,127,1,0151837
-"c:/MonoGame/Pong/Pong/Content/pedro_pedro_pe.png","c:/MonoGame/Pong/Pong/Content/bin/Windows/pedro_pedro_pe.xnb","TextureProcessor","Texture2DContent",1522367,14745685,0,352437
-"c:/MonoGame/Pong/Pong/Content/pointScored.mp3","c:/MonoGame/Pong/Pong/Content/bin/Windows/pointScored.xnb","SongProcessor","SongContent",51326,129,0,0628057
-"c:/MonoGame/Pong/Pong/Content/Score.spritefont","c:/MonoGame/Pong/Pong/Content/bin/Windows/Score.xnb","FontDescriptionProcessor","SpriteFontContent",2073,8393753,0,4379971
-"c:/MonoGame/Pong/Pong/Content/titleScreen.spritefont","c:/MonoGame/Pong/Pong/Content/bin/Windows/titleScreen.xnb","FontDescriptionProcessor","SpriteFontContent",2073,2102297,0,0661872
+"c:/MonoGame/Pong/Pong/Pong/Content/arcade-beat-323176.mp3","c:/MonoGame/Pong/Pong/Pong/Content/bin/Windows/titleScreenMusic.xnb","SongProcessor","SongContent",4555755,134,1.925249
+"c:/MonoGame/Pong/Pong/Pong/Content/balkGrow.png","c:/MonoGame/Pong/Pong/Pong/Content/bin/Windows/balkGrow.xnb","TextureProcessor","Texture2DContent",19345,262229,0.0489815
+"c:/MonoGame/Pong/Pong/Pong/Content/balkwhite (1).png","c:/MonoGame/Pong/Pong/Pong/Content/bin/Windows/balk.xnb","TextureProcessor","Texture2DContent",92,38997,0.0043497
+"c:/MonoGame/Pong/Pong/Pong/Content/ballGrow.png","c:/MonoGame/Pong/Pong/Pong/Content/bin/Windows/ballGrow.xnb","TextureProcessor","Texture2DContent",22493,262229,0.0251073
+"c:/MonoGame/Pong/Pong/Pong/Content/ballwhite.png","c:/MonoGame/Pong/Pong/Pong/Content/bin/Windows/ball.xnb","TextureProcessor","Texture2DContent",1267,16469,0.0193891
+"c:/MonoGame/Pong/Pong/Pong/Content/bounceOne.mp3","c:/MonoGame/Pong/Pong/Pong/Content/bin/Windows/bounceOne.xnb","SongProcessor","SongContent",13886,127,0.1320626
+"c:/MonoGame/Pong/Pong/Pong/Content/bounceTwo.mp3","c:/MonoGame/Pong/Pong/Pong/Content/bin/Windows/bounceTwo.xnb","SongProcessor","SongContent",9086,127,0.1421528
+"c:/MonoGame/Pong/Pong/Pong/Content/Instructions.spritefont","c:/MonoGame/Pong/Pong/Pong/Content/bin/Windows/Instructions.xnb","FontDescriptionProcessor","SpriteFontContent",2068,21529,0.1139616
+"c:/MonoGame/Pong/Pong/Pong/Content/middleLineNew.png","c:/MonoGame/Pong/Pong/Pong/Content/bin/Windows/middleLine.xnb","TextureProcessor","Texture2DContent",3237,229045,0.0338038
+"c:/MonoGame/Pong/Pong/Pong/Content/Pedro - Pedro Pedro Pedro.mp3","c:/MonoGame/Pong/Pong/Pong/Content/bin/Windows/PedroSong.xnb","SongProcessor","SongContent",7133574,127,1.7172858
+"c:/MonoGame/Pong/Pong/Pong/Content/pedro_pedro_pe.png","c:/MonoGame/Pong/Pong/Pong/Content/bin/Windows/pedro_pedro_pe.xnb","TextureProcessor","Texture2DContent",1522367,14745685,0.4761907
+"c:/MonoGame/Pong/Pong/Pong/Content/pointScored.mp3","c:/MonoGame/Pong/Pong/Pong/Content/bin/Windows/pointScored.xnb","SongProcessor","SongContent",51326,129,0.1365625
+"c:/MonoGame/Pong/Pong/Pong/Content/Score.spritefont","c:/MonoGame/Pong/Pong/Pong/Content/bin/Windows/Score.xnb","FontDescriptionProcessor","SpriteFontContent",2073,4199449,0.3597905
+"c:/MonoGame/Pong/Pong/Pong/Content/titleScreen.spritefont","c:/MonoGame/Pong/Pong/Pong/Content/bin/Windows/titleScreen.xnb","FontDescriptionProcessor","SpriteFontContent",2072,529433,0.0899567
+"c:/MonoGame/Pong/Pong/Pong/Content/VerticalMiddleLine.png","c:/MonoGame/Pong/Pong/Pong/Content/bin/Windows/VerticalMiddleLine.xnb","TextureProcessor","Texture2DContent",2280,407125,0.1230994

@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Pong.Scenes;
 
@@ -14,6 +15,7 @@ public class Game1 : Game
     private Scene _currentScene;
     private SpriteFont _font;
     private SpriteFont _titleFont;
+    private SpriteFont _instructionsFont;
     private Song backgroundMusic;
 
 
@@ -21,6 +23,7 @@ public class Game1 : Game
     private Texture2D ballTexture;
     private Texture2D leftPaddleTexture;
     private Texture2D middleLineTexture;
+    private Texture2D VerticalMiddleLineTexture;
     private SpriteFont leftPoints;
     private Song pointScored;
     private Song bounceOne;
@@ -56,10 +59,10 @@ public class Game1 : Game
         float scale = Math.Min(scaleX, scaleY);
         _scaleMatrix = Matrix.CreateScale(scale);
 
-        // Load fonts and music
+        // Load fonts
         _font = Content.Load<SpriteFont>("Score");
-        backgroundMusic = Content.Load<Song>("titleScreenMusic");
         _titleFont = Content.Load<SpriteFont>("titleScreen");
+        _instructionsFont = Content.Load<SpriteFont>("Instructions");
 
 
         // Load Game Scenes assets
@@ -67,13 +70,17 @@ public class Game1 : Game
         ballTexture = Content.Load<Texture2D>("ball");
         leftPaddleTexture = Content.Load<Texture2D>("balk");
         middleLineTexture = Content.Load<Texture2D>("middleLine");
+        VerticalMiddleLineTexture = Content.Load<Texture2D>("verticalMiddleLine");
 
+        // Load sound effects
         pointScored = Content.Load<Song>("pointScored");
         bounceOne = Content.Load<Song>("bounceOne");
         bounceTwo = Content.Load<Song>("bounceTwo");
+        backgroundMusic = Content.Load<Song>("titleScreenMusic");
 
         // Start with the TitleScene
         _currentScene = new TitleScene(GraphicsDevice, _spriteBatch, _font, backgroundMusic, _titleFont);
+        //_currentScene = new twoPlayer(GraphicsDevice, _spriteBatch, Content, leftPoints, leftPoints, ballTexture, leftPaddleTexture, middleLineTexture, pointScored, bounceOne, bounceTwo);
     }
 
     protected override void Update(GameTime gameTime)
@@ -82,12 +89,17 @@ public class Game1 : Game
         {
             if (titleScene.SelectedOption == 1) // Player selected 1 Player Mode
             {
-                _currentScene = new onePlayer(GraphicsDevice, _spriteBatch, Content, leftPoints, leftPoints, ballTexture, leftPaddleTexture, middleLineTexture, pointScored, bounceOne, bounceTwo);
+                _currentScene = new onePlayer(GraphicsDevice, _spriteBatch, Content, leftPoints, leftPoints, ballTexture, leftPaddleTexture, middleLineTexture, pointScored, bounceOne, bounceTwo, _instructionsFont);
                 titleScene.RequestStartGame = false; // Reset the request to start game, so it doesn't trigger immediately when the player returns to the title screen after a game
             }
             else if (titleScene.SelectedOption == 2) // Player selected 2 Player Mode
             {
-                _currentScene = new twoPlayer(GraphicsDevice, _spriteBatch, Content, leftPoints, leftPoints, ballTexture, leftPaddleTexture, middleLineTexture, pointScored, bounceOne, bounceTwo);
+                _currentScene = new twoPlayer(GraphicsDevice, _spriteBatch, Content, leftPoints, leftPoints, ballTexture, leftPaddleTexture, middleLineTexture, pointScored, bounceOne, bounceTwo, _instructionsFont);
+                titleScene.RequestStartGame = false; // Reset the request to start game, so it doesn't trigger immediately when the player returns to the title screen after a game
+            }
+            else if (titleScene.SelectedOption == 3) // Player selected 2 VS 2 Mode
+            {
+                _currentScene = new twoVsTwo(GraphicsDevice, _spriteBatch, Content, leftPoints, leftPoints, ballTexture, leftPaddleTexture, middleLineTexture, pointScored, bounceOne, bounceTwo, VerticalMiddleLineTexture, _instructionsFont);
                 titleScene.RequestStartGame = false; // Reset the request to start game, so it doesn't trigger immediately when the player returns to the title screen after a game
             }
         }
@@ -111,6 +123,16 @@ public class Game1 : Game
             twoPlayer.GameOver = false;
             twoPlayer.winner = 0;
         }
+        else if (_currentScene is twoVsTwo twoVsTwo && twoVsTwo.GameOver) // Check if the Players game in 2 VS 2 Mode is over
+        {
+            int gameWinner = twoVsTwo.winner; // Get the result of the game (1 = Left Team won, 2 = Right Team won)
+            bool gameWon = false; // Set to 0 because the Endscreen scene expects a bool for gameWon, but in 2 VS 2 Mode it's not used, so a default value of false is submitted
+            _currentScene = new endScreen(GraphicsDevice, _spriteBatch, _font, backgroundMusic, _titleFont, gameWon, gameWinner);
+
+            // Reset the twoVsTwo scene's GameOver and winner variables for when the Players want to play again
+            twoVsTwo.GameOver = false;
+            twoVsTwo.winner = 0;
+        }
         else if (_currentScene is endScreen endScreen && endScreen.RequestTitleScreen) // Check if the current scene is the end screen and if the Player wants to return to the title screen
         {
             _currentScene = new TitleScene(GraphicsDevice, _spriteBatch, _font, backgroundMusic, _titleFont);
@@ -119,6 +141,13 @@ public class Game1 : Game
         {
             _currentScene.Update(gameTime);
         }
+
+
+        // Allow the Player to exit the game at any time and in any Game Mode by pressing the Escape key
+        KeyboardState keyBoard = Keyboard.GetState();
+        if (keyBoard.IsKeyDown(Keys.Escape))
+            Exit();
+
         base.Update(gameTime);
     }
 

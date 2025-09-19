@@ -73,7 +73,7 @@ public class endScreen : Scene
         else if (gameWon == false && gameWinner == 0)
         {
             // You lost against the AI
-            _spriteBatch.DrawString(_titleFont, "You Lost... :-(", new Vector2(_graphics.Viewport.Width / 2 - _titleFont.MeasureString("You Lost... :-(").X, 400) / 2, Color.White);
+            _spriteBatch.DrawString(_titleFont, "You Lost... :-(", new Vector2(_graphics.Viewport.Width / 2 - _titleFont.MeasureString("You Lost... :-(").X / 2, 400), Color.White);
         }
 
 
@@ -81,12 +81,12 @@ public class endScreen : Scene
         if (gameWinner == 1)
         {
             // Left Player won with 2 Player Mode
-            _spriteBatch.DrawString(_titleFont, "Left Player Wins! :-)", new Vector2(_graphics.Viewport.Width / 2 - _titleFont.MeasureString("Left Player Wins! :-)").X/2, 400), Color.White);
+            _spriteBatch.DrawString(_titleFont, "Left Wins! :-)", new Vector2(_graphics.Viewport.Width / 2 - _titleFont.MeasureString("Left Wins! :-)").X/2, 400), Color.White);
         }
         else if (gameWinner == 2)
         {
             // Right Player won with 2 Player Mode
-            _spriteBatch.DrawString(_titleFont, "Right Player Wins! :-)", new Vector2(_graphics.Viewport.Width / 2 - _titleFont.MeasureString("Right Player Wins! :-)").X/2, 400), Color.White);
+            _spriteBatch.DrawString(_titleFont, "Right Wins! :-)", new Vector2(_graphics.Viewport.Width / 2 - _titleFont.MeasureString("Right Wins! :-)").X/2, 400), Color.White);
         }
 
 

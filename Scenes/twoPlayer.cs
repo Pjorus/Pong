@@ -39,6 +39,7 @@ public class twoPlayer : Scene
     // Fonts and score
     private SpriteFont leftPoints;
     private SpriteFont rightPoints;
+    private SpriteFont instructionsFont;
     private Vector2 leftFontPos;
     private Vector2 rightFontPos;
     private int leftLives = 3;
@@ -63,7 +64,7 @@ public class twoPlayer : Scene
     public bool GameOver = false; // Set to public to be accessed in Game1.cs to determine when to switch to the end screen
 
 
-    public twoPlayer(GraphicsDevice graphics, SpriteBatch spriteBatch, ContentManager content, SpriteFont _leftPoints, SpriteFont _rightPoints, Texture2D _ballTexture, Texture2D _leftPaddleTexture, Texture2D _middleLineTexture, Song _pointScored, Song _bounceOne, Song _bounceTwo)
+    public twoPlayer(GraphicsDevice graphics, SpriteBatch spriteBatch, ContentManager content, SpriteFont _leftPoints, SpriteFont _rightPoints, Texture2D _ballTexture, Texture2D _leftPaddleTexture, Texture2D _middleLineTexture, Song _pointScored, Song _bounceOne, Song _bounceTwo, SpriteFont _instructionsFont)
     {
         // Load all assets and set them to variables
         _graphics = graphics;
@@ -81,6 +82,7 @@ public class twoPlayer : Scene
         // fonts
         leftPoints = _leftPoints;
         rightPoints = _rightPoints;
+        instructionsFont = _instructionsFont;
 
         // sounds
         pointScored = _pointScored;
@@ -307,14 +309,20 @@ public class twoPlayer : Scene
 
         _spriteBatch.Draw(leftPaddleTexture, leftPaddlePosition, Color.White);
         _spriteBatch.Draw(leftPaddleTexture, rightPaddlePosition, Color.White);
-
         
         if (leftPoints != null)
             _spriteBatch.DrawString(leftPoints, leftLives.ToString(), leftFontPos, Color.Gray);
         if (rightPoints != null)
             _spriteBatch.DrawString(rightPoints, rightLives.ToString(), rightFontPos, Color.Gray);
 
+        // Draw instructions for the player
+        if (instructionsFont != null)
+        {
+            _spriteBatch.DrawString(instructionsFont, "W for Up\nS for Down", new Vector2(VIRTUAL_WIDTH / 4f, VIRTUAL_HEIGHT / 2f), Color.Gray);
+            _spriteBatch.DrawString(instructionsFont, "Up for Up\nDown for Down", new Vector2(VIRTUAL_WIDTH * 3f / 4f - 200f, VIRTUAL_HEIGHT / 2f), Color.Gray);
+        }
+
         // Draw the ball last to ensure it appears above everything else
-        _spriteBatch.Draw(ballTexture, ballPosition, Color.White);
+            _spriteBatch.Draw(ballTexture, ballPosition, Color.White);
     }
 }
